@@ -1,11 +1,10 @@
 
 import express, { Router } from 'express';
-import { googleAuth, googleAuthCallback } from '../controllers/authController';
+import { googleAuth } from '../controllers/authController';
 
-const router: Router = express.Router();
+const authRouter: Router = express.Router();
 
-router.get('/google', googleAuth);
-router.get('/google/callback', googleAuthCallback);
+authRouter.post('/verfiy-token', googleAuth);
 
-export default router;
+export default authRouter;
 

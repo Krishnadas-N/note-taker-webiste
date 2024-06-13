@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { GoogleCredentials } from '../models/googleAuth.Model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService  {
@@ -12,19 +14,8 @@ export class AuthService  {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
-
-  public loginWithGoogle(): void {
-    window.location.href = `${this.apiUrl}/google`;
-  }
-  public handleAuthCallback(): void {
-    const token = new URLSearchParams(window.location.search).get('token');
-    if (token) {
-      localStorage.setItem('token', token);
-      this.router.navigate(['/']);
+    loginWithGoogle(credentials:GoogleCredentials):Observable<any> {
+      console.log("Crendiatals form gogole",credentials)
+      return this.http.post(`${this.apiUrl}/verify-token`, credentials);
     }
-  }
-  public logout(): void {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
 }

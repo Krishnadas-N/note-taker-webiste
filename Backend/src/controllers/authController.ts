@@ -1,12 +1,13 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import admin from 'firebase-admin';
 
-export const googleAuth = (req: Request, res: Response) => {
-  // Handle Google authentication
+export const googleAuth = (req: Request, res: Response,next:NextFunction) => {
+  try{
+   const userData = req.body 
+   console.log(userData)
+  }catch(err){
+    next(err)
+  }
 };
 
-export const googleAuthCallback = (req: Request, res: Response) => {
-    const user = req.user as any;
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
-    res.redirect(`http://localhost:4200/login-success?token=${token}`);
-};

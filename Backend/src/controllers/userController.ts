@@ -5,7 +5,7 @@ import CustomError from '../utils/customError';
 
 export const getUserProfile = async (req: Request, res: Response,next:NextFunction) => {
   try {
-    const userId = req.user.id; 
+    const userId = req.user; 
     const userProfile = await User.findById(userId).select('-password'); 
 
     if (!userProfile) {
