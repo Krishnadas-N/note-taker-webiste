@@ -1,3 +1,46 @@
-<p>home works!</p>
+<div>
+  <main class="flex flex-col md:flex-row"> <!-- Use flex-col for mobile and md:flex-row for medium screens and above -->
 
-<app-login></app-login>
+      <!-- Options section (right column on desktop, top on mobile) -->
+      <div class="w-full md:w-1/4 p-4 mb-4 md:mb-0 md:mr-4"> <!-- mb-4 for spacing between sections on mobile -->
+          <ul class="mx-auto max-w-xs text-left font-medium text-lg leading-none border-gray-300 divide-y divide-gray-300">
+              <li>
+                  <a [routerLink]="'/'" class="py-3.5 w-full flex items-center text-black hover:text-gray-900 hover:bg-gray-100">
+                      <span class="ml-5 mr-2.5 w-1 h-7 bg-black rounded-r-md"></span>
+                      Create a Note
+                  </a>
+              </li>
+              <li>
+                  <a  [routerLink]="'/my-notes'" class="py-3.5 w-full flex items-center text-black hover:text-gray-900 hover:bg-gray-100">
+                      <span class="ml-5 mr-2.5 w-1 h-7 bg-black rounded-r-md"></span>
+                      My Notes
+                  </a>
+              </li>
+              <li>
+                <ng-container *ngIf="isAuthenticated(); else notAuthenticated">
+                  <a class="py-3.5 w-full flex items-center text-black hover:text-gray-900 hover:bg-gray-100">
+                    <span class="ml-5 mr-2.5 w-1 h-7 bg-black rounded-r-md"></span>
+                    Profile
+                  </a>
+                </ng-container>
+
+                <ng-template #notAuthenticated>
+                  <div class="py-3.5 w-full flex items-center text-black hover:text-gray-900 hover:bg-gray-100">
+                    <span class="ml-5 mr-2.5 w-1 h-7 bg-black rounded-r-md"></span>
+                    <app-login></app-login>
+                  </div>
+                </ng-template>
+
+
+              </li>
+          </ul>
+      </div>
+
+     <div class="w-full md:w-3/4 p-4">
+
+   <router-outlet></router-outlet>
+
+</div>
+
+  </main>
+</div>

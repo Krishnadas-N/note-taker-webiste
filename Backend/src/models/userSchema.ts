@@ -6,11 +6,12 @@ export interface IUser extends Document {
   password: string;
   createdAt: Date;
   googleId: string;
+  refreshToken?: string;
 }
 
 
 const UserSchema: Schema = new Schema({
-  profile:{
+  profileImage:{
         type:String
   },
   username: {
@@ -25,13 +26,13 @@ const UserSchema: Schema = new Schema({
   },
   password: {
     type: String,
-    required: true
   },
   createdAt: {
     type: Date,
     default: Date.now
   },
   googleId: String,
+  refreshToken: String,
 });
 
 const User: Model<IUser> = mongoose.model<IUser>('User', UserSchema);

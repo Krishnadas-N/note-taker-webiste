@@ -9,6 +9,7 @@ import passport from './config/passportConfig';
 dotenv.config();
 import admin from 'firebase-admin';
 import authRouter from './routers/authRoute';
+import userRouter from './routers/userRouter';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -29,7 +30,9 @@ connectDb()
 
 // app.use(passport.initialize());
 
-app.use('/auth',authRouter)
+app.use('/auth',authRouter);
+
+app.use('/user',userRouter)
 
 app.use((err: CustomError, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);

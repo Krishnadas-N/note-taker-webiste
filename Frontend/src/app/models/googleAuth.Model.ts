@@ -27,3 +27,9 @@ export interface StsTokenManager {
   accessToken: string
   expirationTime: number
 }
+
+
+export  type AuthResponseData = {
+  token: string;
+  refreshToken: string;
+};

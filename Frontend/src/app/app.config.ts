@@ -7,6 +7,8 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { bearerTokenInterceptor } from './interceptors/bearer-token.interceptor';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { JwtModule } from '@auth0/angular-jwt';
+import { errorHandlerInterceptor } from './interceptors/error-handler.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -14,7 +16,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
   provideHttpClient(
       withFetch(),
-      // withInterceptors([bearerTokenInterceptor])
+      withInterceptors([bearerTokenInterceptor,errorHandlerInterceptor])
   ),
   importProvidersFrom(
     JwtModule.forRoot({
@@ -27,7 +29,7 @@ export const appConfig: ApplicationConfig = {
 ),
   { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
   provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-  provideRouter(routes),
+  provideRouter(routes), provideAnimationsAsync(),
 
 ]
 };

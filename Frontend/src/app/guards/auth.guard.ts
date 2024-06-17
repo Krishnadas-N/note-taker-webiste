@@ -1,10 +1,12 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { TokenService } from '../services/token.service';
 
-export const authGuard: CanActivateFn = async(route, state) => {
-  const angularFireAuth = inject(AngularFireAuth);
-  const user = await angularFireAuth.currentUser;
-  const isLoggedIn = !!user;
-  return isLoggedIn;
+export const authGuard: CanActivateFn = (route, state) => {
+  const tokenService = inject(TokenService);
+  const token = tokenService.getAccessToken();
+  if(token){
+   return true
+  }
+   return false
 };

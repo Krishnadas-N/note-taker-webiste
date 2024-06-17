@@ -5,4 +5,7 @@ export interface userModel{
     password: string;
     createdAt: Date;
     googleId: string;
+    refreshToken?: string;
 }
+
+

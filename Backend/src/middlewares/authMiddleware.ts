@@ -5,7 +5,7 @@ import { sendErrorResponse } from '../utils/resoponseHandler';
 
 
 export const authenticateJWT = async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+    const token = req.headers['authorization']?.split(' ')[1]
   
     if (!token) {
        return sendErrorResponse(res, 'Authentication token missing',401)
@@ -13,7 +13,7 @@ export const authenticateJWT = async (req: Request, res: Response, next: NextFun
   
     try {
       const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
-      const user = await User.findById(decoded.id);
+      const user = await User.findById(decoded.userId);
   
      
       if (!user) {
