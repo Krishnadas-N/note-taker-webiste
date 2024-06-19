@@ -42,3 +42,26 @@ export const getUserNotes = async (req: Request, res: Response,next:NextFunction
     next(error)
   }
 };
+
+export const getNoteDetails = async (req: Request, res: Response,next:NextFunction): Promise<void> => {
+  try {
+    const noteId = req.params.noteId
+    const user = req.user
+    const note = await  Note.findOne({user:user,_id:noteId}) as INote
+    return sendSuccessResponse<INote>(res, note,201);
+  } catch (error) {
+    next(error)
+  }
+};
+
+export const deleteNote = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const noteId = req.params.noteId; 
+    const user = req.user;
+     await Note.findByIdAndDelete({ _id: noteId });
+
+    sendSuccessResponse<{}>(res, {}, 200);
+  } catch (error) {
+    next(error); 
+  }
+};

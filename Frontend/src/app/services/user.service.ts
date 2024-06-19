@@ -18,4 +18,13 @@ export class UserService {
   getNotes():Observable<ApiResponse<INote[]>>{
     return this.http.get<ApiResponse<INote[]>>(`${this.apiUrl}/get-notes`)
   }
+
+  getANote(noteId:string):Observable<ApiResponse<INote>>{
+    return this.http.get<ApiResponse<INote>>(`${this.apiUrl}/get-note/${noteId}`)
+  }
+
+  deleteNote(noteId:string):Observable<ApiResponse<void>>{
+    return this.http.delete<ApiResponse<void>>(`${this.apiUrl}/delete-note/${noteId}`)
+  }
+
 }
