@@ -71,4 +71,7 @@ NoteTaker is a web application designed to provide users with a simple and effic
 NoteTaker offers a comprehensive and user-friendly platform for managing personal notes. By leveraging modern web technologies and ensuring secure data handling, NoteTaker aims to be the go-to solution for individuals seeking an efficient and stylish note-taking experience.
 
 
-API DOCUMENTAIION : [API DOCUMENTAIION ](https://documenter.getpostman.com/view/33513010/2sA3XTfgG3)
+[API DOCUMENTAION ](https://documenter.getpostman.com/view/33513010/2sA3XTfgG3)
+
+ [Figma](https://www.figma.com/design/p3oBAjMPFbyGlSme7S2qeS/note-taker?node-id=0-1&t=MUhJfy7eszXfXPW9-1)
+ 

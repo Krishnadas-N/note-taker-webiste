@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink ,Router} from '@angular/router';
 import { TokenService } from '../../services/token.service';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from '../login/login.component';
@@ -15,7 +15,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class SidebarComponent {
   isOpen = false;
-  constructor(private authService:AuthService){}
+  constructor(private authService:AuthService,private router:Router){}
   toggleSidebar() {
     this.isOpen = !this.isOpen;
   }
@@ -23,4 +23,17 @@ export class SidebarComponent {
   public isAuthenticated():boolean{
     return this.authService.isAuthenticated()
    }
+
+  public logout(){
+    this.authService.logout()
+  }
+
+  navigateToMyNotes(){
+    if(this.isAuthenticated()){
+      this.router.navigate(['/my-notes'])
+    }else{
+    return
+    }
+
+  }
 }
