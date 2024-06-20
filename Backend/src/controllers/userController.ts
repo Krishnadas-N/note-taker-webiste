@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { sendErrorResponse, sendSuccessResponse } from '../utils/resoponseHandler'; 
-import User from '../models/userSchema';
+import User, { IUser } from '../models/userSchema';
 import CustomError from '../utils/customError';
 import  Note, { INote } from '../models/notesSchema';
 
@@ -60,8 +60,22 @@ export const deleteNote = async (req: Request, res: Response, next: NextFunction
     const user = req.user;
      await Note.findByIdAndDelete({ _id: noteId });
 
-    sendSuccessResponse<{}>(res, {}, 200);
+     return sendSuccessResponse<{}>(res, {}, 200);
   } catch (error) {
     next(error); 
   }
 };
+
+
+export const getCurrentUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+  const user = req.user;
+   const currentUser = await User.findById(user)
+
+    return sendSuccessResponse<IUser>(res, currentUser as IUser, 200);
+  } catch (error) {
+    next(error); 
+  }
+};
+
+

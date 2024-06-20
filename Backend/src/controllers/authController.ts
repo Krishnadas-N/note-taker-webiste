@@ -32,7 +32,7 @@ export const googleAuth = async (
     const refreshToken  = generateRefreshToken(user._id as string);
     user.refreshToken = refreshToken;
     await user.save();
-    console.log("User logged in:", user);
+    console.log("User logged in:", authToken);
     return sendSuccessResponse<AuthResponseData>(
       res,
       { token: authToken, refreshToken },
