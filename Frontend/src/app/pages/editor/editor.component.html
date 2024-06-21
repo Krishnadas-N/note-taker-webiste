@@ -15,6 +15,7 @@ formControlName="title"
     <div
       class="absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
     ></div>
+
     <button
       [disabled]="!form.valid"
       type="submit"
@@ -23,8 +24,14 @@ formControlName="title"
       [ngClass]="{ 'text-gray-400 cursor-not-allowed': !form.valid }"
       role="button"
     >
+    <span *ngIf="!isLoading">
       Publish
-    </button>
+    </span>
+      <span  *ngIf="isLoading">
+        <div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 bg-white  border-gray-900"></div>
+     </span>
+
+      </button>
   </div>
 </div>
 <!-- Notes Section -->

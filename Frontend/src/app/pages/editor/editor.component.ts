@@ -15,6 +15,7 @@ import { EditorForm } from '../../models/form.models';
   providers:[UserService]
 })
 export class EditorComponent implements OnInit{
+isLoading:boolean=false
   constructor(private userService:UserService) {
     const ngxEditorConfig: any = {
       locals: {
@@ -103,14 +104,17 @@ this.form.valueChanges.subscribe(data=>console.log(data))
 
   onSubmit(): void {
     if (this.form.valid) {
+        this.isLoading=true;
       const formValue: EditorForm = this.form.value as EditorForm;
       console.log(this.form.value);
      this.userService.saveNotes(formValue).subscribe({
       next:(res)=>{
-
+        this.isLoading=false;
+        this.form.reset()
       },
       error:(err)=>{
-
+        this.isLoading=false;
+        this.form.reset()
       }
      })
     }
